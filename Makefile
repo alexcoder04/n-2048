@@ -1,6 +1,6 @@
 
 build:
-	nspire-merge --out out.lua -- gui.lua main.lua
+	nspire-merge --out out.lua -- gui.lua logic.lua main.lua
 	luna out.lua n-2048.tns
 
 clean:
