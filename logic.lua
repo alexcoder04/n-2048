@@ -27,6 +27,19 @@ function moveLeft(f)
     return f
 end
 
+function mergeLeft(grid)
+    new = grid
+    for row = 1, 4 do
+        for cell = 1, 3 do
+            if(grid[row][cell] == new[row][cell+1] and grid[row][cell] ~= 0) then
+                new[row][cell] = new[row][cell] + 1
+                new[row][cell+1] = 0
+            end
+        end
+    end
+    return grid
+end
+
 function rotateClockwise(f)
     n_f = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
     for i=1, 4 do
@@ -51,6 +64,8 @@ function on.charIn(char)
     if char == '8' then
         field = rotateClockwise(field)
         field = moveLeft(field)
+        field = mergeLeft(field)
+        field = moveLeft(field)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
@@ -62,6 +77,8 @@ function on.charIn(char)
         field = rotateClockwise(field)
         field = mirrorHoriz(field)
         field = moveLeft(field)
+        field = mergeLeft(field)
+        field = moveLeft(field)
         field = mirrorHoriz(field)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
@@ -72,12 +89,16 @@ function on.charIn(char)
     end
     if char == '4' then
         field = moveLeft(field)
+        field = mergeLeft(field)
+        field = moveLeft(field)
         field = addTwo(field)
         platform.window:invalidate()
         return
     end
     if char == '6' then
         field = mirrorHoriz(field)
+        field = moveLeft(field)
+        field = mergeLeft(field)
         field = moveLeft(field)
         field = mirrorHoriz(field)
         field = addTwo(field)
