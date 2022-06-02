@@ -1,12 +1,12 @@
 
-function addTwo(f)
+function insertNumber(f)
     i = math.random(1, 4)
     j = math.random(1, 4)
     while (f[i][j] ~= 0) do
         i = math.random(1, 4)
         j = math.random(1, 4)
     end
-    f[i][j] = 1
+    f[i][j] = math.random(1, 2)
     return f
 end
 
@@ -107,7 +107,7 @@ function on.charIn(char)
             return
         end
         if areFreeFields(field) then
-            field = addTwo(field)
+            field = insertNumber(field)
         end
         platform.window:invalidate()
     end
@@ -127,7 +127,7 @@ function on.charIn(char)
             return
         end
         if areFreeFields(field) then
-            field = addTwo(field)
+            field = insertNumber(field)
         end
         platform.window:invalidate()
     end
@@ -141,7 +141,7 @@ function on.charIn(char)
             return
         end
         if areFreeFields(field) then
-            field = addTwo(field)
+            field = insertNumber(field)
         end
         platform.window:invalidate()
     end
@@ -157,7 +157,7 @@ function on.charIn(char)
             return
         end
         if areFreeFields(field) then
-            field = addTwo(field)
+            field = insertNumber(field)
         end
         platform.window:invalidate()
     end
@@ -165,6 +165,6 @@ end
 
 function on.construction()
     field = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
-    field = addTwo(field)
+    field = insertNumber(field)
 end
 

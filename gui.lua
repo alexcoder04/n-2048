@@ -37,7 +37,7 @@ function drawNumbers(gc)
         for j=1, 4 do
             gc:drawString(
                 getStringFromExponent(field[i][j]),
-                marginLeft+((j-1)*cellWidth)+(cellWidth/2),
+                marginLeft+((j-1)*cellWidth)+(cellWidth/2)-(#getStringFromExponent(field[i][j])*4),
                 marginTop+((i-1)*cellWidth)+(cellWidth/2),
                 "middle"
             )
