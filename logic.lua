@@ -1,7 +1,14 @@
 
-function on.construction()
-    field = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
+function resetGame()
+    field = {
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0},
+        {0, 0, 0, 0}
+    }
+    gameOver = false
     field = insertNumber(field)
+    platform.window:invalidate()
 end
 
 function areFreeFields(grid)
@@ -98,9 +105,19 @@ function mirrorHoriz(f)
     return n_f
 end
 
-function on.charIn(char)
-    if gameOver then return end
-    if char == '8' then
+function fieldChanged(old, new)
+    for i=1, 4 do
+        for j=1, 4 do
+            if old[i][j] ~= new[i][j] then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+function handleMove(dir)
+    if dir == "up" then
         field = rotateClockwise(field)
         field = move(field)
         field = merge(field)
@@ -108,9 +125,9 @@ function on.charIn(char)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
-        platform.window:invalidate()
     end
-    if char == '2' then
+
+    if dir == "down" then
         field = rotateClockwise(field)
         field = mirrorHoriz(field)
         field = move(field)
@@ -120,29 +137,20 @@ function on.charIn(char)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
         field = rotateClockwise(field)
-        platform.window:invalidate()
     end
-    if char == '4' then
+
+    if dir == "left" then
         field = move(field)
         field = merge(field)
         field = move(field)
-        platform.window:invalidate()
     end
-    if char == '6' then
+
+    if dir == "right" then
         field = mirrorHoriz(field)
         field = move(field)
         field = merge(field)
         field = move(field)
         field = mirrorHoriz(field)
-        platform.window:invalidate()
-    end
-    if areFreeFields(field) then
-        field = insertNumber(field)
-    end
-    if gameLost(field) then
-        gameOver = true
-        platform.window:invalidate()
-        return
     end
 end
 
