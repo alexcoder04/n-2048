@@ -81,4 +81,3 @@ function drawNumbers(gc)
         end
     end
 end
-

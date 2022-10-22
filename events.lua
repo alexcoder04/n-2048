@@ -8,7 +8,7 @@ function on.paint(gc)
     drawColors(gc)
     drawNumbers(gc)
     if gameOver then
-        gc:drawString("YOU LOST!", 130, 15, "middle");
+        gc:drawString("GAME OVER!", 125, 15, "middle");
     end
 end
 
@@ -47,4 +47,3 @@ function on.charIn(char)
         return
     end
 end
-

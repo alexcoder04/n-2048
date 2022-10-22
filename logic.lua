@@ -43,8 +43,8 @@ function gameLost(grid)
 end
 
 function insertNumber(f)
-    i = math.random(1, 4)
-    j = math.random(1, 4)
+    local i = math.random(1, 4)
+    local j = math.random(1, 4)
     while (f[i][j] ~= 0) do
         i = math.random(1, 4)
         j = math.random(1, 4)
@@ -73,7 +73,7 @@ end
 
 -- left
 function merge(grid)
-    new = grid
+    local new = grid
     for row = 1, 4 do
         for cell = 1, 3 do
             if(grid[row][cell] == new[row][cell+1] and grid[row][cell] ~= 0) then
@@ -86,23 +86,23 @@ function merge(grid)
 end
 
 function rotateClockwise(f)
-    n_f = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
+    local new = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
     for i=1, 4 do
         for j=1, 4 do
-            n_f[j][i] = f[i][j]
+            new[j][i] = f[i][j]
         end
     end
-    return n_f
+    return new
 end
 
 function mirrorHoriz(f)
-    n_f = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
+    local new = {{0,0,0,0},{0,0,0,0},{0,0,0,0},{0,0,0,0}}
     for i=1, 4 do
         for j=1, 4 do
-            n_f[i][5-j] = f[i][j]
+            new[i][5-j] = f[i][j]
         end
     end
-    return n_f
+    return new
 end
 
 function fieldChanged(old, new)
@@ -153,4 +153,3 @@ function handleMove(dir)
         field = mirrorHoriz(field)
     end
 end
-
