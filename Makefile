@@ -1,7 +1,6 @@
 
 TEMP_LUA = out.lua
 OUT_FILE = n-2048.tns
-UPLOADER_PATH = /home/alex/Scripts:/home/alex/.local/bin
 
 all: clean build upload
 
@@ -14,5 +13,5 @@ build:
 	luna $(TEMP_LUA) $(OUT_FILE)
 
 upload:
-	PATH=$(UPLOADER_PATH):$(PATH) uploadnspire $(OUT_FILE)
+	uploadnspire $(OUT_FILE)
 
