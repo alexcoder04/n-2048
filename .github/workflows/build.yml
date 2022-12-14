@@ -28,11 +28,18 @@ jobs:
 
     - name: Install Luna
       run: |
+        command -v luna && exit
         git clone "https://github.com/ndless-nspire/Luna" ~/Luna
         cd ~/Luna
         make
         install -Dm755 luna ~/bin/luna
-        cd "$OLDPWD"
+    
+    - name: Install nspire-merge
+      run: |
+        command -v nspire-merge && exit
+        git clone "https://github.com/alexcoder04/nspire-merge" ~/nspire-merge
+        cd ~/nspire-merge
+        install -Dm755 nspire-merge ~/bin/nspire-merge
 
     - name: Build project
       run: make clean build
