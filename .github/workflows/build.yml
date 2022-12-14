@@ -14,12 +14,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Cache bin folder
+    - name: Cache folders
       uses: actions/cache@v3
       with:
         key: ${{ runner.os }}-bin
         path: |
           ~/bin
+          ~/.local/lib
 
     - name: Create bin folder
       run: |
@@ -40,6 +41,7 @@ jobs:
         git clone "https://github.com/alexcoder04/nspire-merge" ~/nspire-merge
         cd ~/nspire-merge
         install -Dm755 nspire-merge ~/bin/nspire-merge
+        pip install Pillow
 
     - name: Build project
       run: make clean build
