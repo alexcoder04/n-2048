@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Cache bin folder
+      uses: actions/cache@v3
+      with:
+        key: ${{ runner.os }}-bin
+        path: |
+          ~/bin
+
+    - name: Create bin folder
+      run: |
+        mkdir -vp "$HOME/bin"
+        echo "$HOME/bin" >> $GITHUB_PATH
+
+    - name: Install Luna
+      run: |
+        git clone "https://github.com/ndless-nspire/Luna" ~/Luna
+        cd ~/Luna
+        make
+        install -Dm755 luna ~/bin/luna
+        cd "$OLDPWD"
+
+    - name: Build project
+      run: make clean build
+
+    - name: Save tns
+      uses: actions/upload-artifact@v3
+      with:
+        name: tns
+        path: |
+          n-2048.tns
